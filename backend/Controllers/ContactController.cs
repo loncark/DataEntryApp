@@ -3,12 +3,14 @@ using Microsoft.AspNetCore.Mvc;
 namespace backend.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("contacts")]
 public class ContactController : ControllerBase
 {
-    [HttpGet(Name = "contacts")]
-    public IEnumerable<Contact> Get()
+    private ContactService contactService = new ContactService();
+
+    [HttpGet]
+    public List<Contact> Get()
     {
-        return [];
+        return contactService.GetAllContacts();
     }
 }
