@@ -1,10 +1,10 @@
 <template>
   <div class="formContainer">
     <FloatLabel v-for="(item, index) in items" :key="index">
-        <InputText :id="item.label" />
+        <InputText :id="item.label" v-model="item.itemRef.value" :class="{'invalid-input': !item.validationFn(item.itemRef.value)}"/>
         <label :for="item.label"> {{ item.label }}</label>
     </FloatLabel>
-    <Button icon="pi pi-check" label="Submit"></Button>
+    <Button icon="pi pi-check" label="Submit" :disabled="btnDisabled"></Button>
   </div>
 </template>
 
@@ -12,13 +12,19 @@
 import InputText from 'primevue/inputtext'
 import FloatLabel from 'primevue/floatlabel'
 import Button from 'primevue/button'
+import { nameInputIsValid, addressInputIsvalid, emailInputIsValid, phoneInputIsValid } from '../other/validation'
+import { computed, ref } from 'vue'
+
+const btnDisabled = computed(() => {
+  return items.some(item => !item.validationFn(item.itemRef.value))
+})
 
 const items = [
-  { label: "First Name", validationFn: () => true, },
-  { label: "Last Name", validationFn: () => true, },
-  { label: "E-mail", validationFn: () => true, },
-  { label: "Address", validationFn: () => true, },
-  { label: "Phone", validationFn: () => true, },
+  { label: "First Name", validationFn: nameInputIsValid, itemRef: ref('')},
+  { label: "Last Name", validationFn: nameInputIsValid, itemRef: ref('')},
+  { label: "E-mail", validationFn: emailInputIsValid, itemRef: ref('')},
+  { label: "Address", validationFn: addressInputIsvalid, itemRef: ref('')},
+  { label: "Phone", validationFn: phoneInputIsValid, itemRef: ref('')},
 ]
 
 </script>
@@ -37,5 +43,8 @@ const items = [
 
 .p-button {
   width: fit-content
+}
+.invalid-input {
+  border: 3px solid rgb(236, 1, 1);
 }
 </style>
