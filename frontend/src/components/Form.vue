@@ -1,10 +1,12 @@
 <template>
   <div class="formContainer">
     <FloatLabel v-for="(item, index) in items" :key="index">
-        <InputText :id="item.label" v-model="item.itemRef.value" :class="{'invalid-input': !item.validationFn(item.itemRef.value)}"/>
+        <InputText :id="item.label" v-model="item.itemRef.value"/>
         <label :for="item.label"> {{ item.label }}</label>
     </FloatLabel>
-    <Button icon="pi pi-check" label="Submit" :disabled="btnDisabled"></Button>
+    <Toast/>
+    <Button icon="pi pi-check" label="Submit" @click="handleSubmitClick"></Button>
+
   </div>
 </template>
 
@@ -13,11 +15,9 @@ import InputText from 'primevue/inputtext'
 import FloatLabel from 'primevue/floatlabel'
 import Button from 'primevue/button'
 import { nameInputIsValid, addressInputIsvalid, emailInputIsValid, phoneInputIsValid } from '../other/validation'
-import { computed, ref } from 'vue'
-
-const btnDisabled = computed(() => {
-  return items.some(item => !item.validationFn(item.itemRef.value))
-})
+import { ref } from 'vue'
+import Toast from 'primevue/toast'
+import { useToast } from "primevue/usetoast";
 
 const items = [
   { label: "First Name", validationFn: nameInputIsValid, itemRef: ref('')},
@@ -26,6 +26,19 @@ const items = [
   { label: "Address", validationFn: addressInputIsvalid, itemRef: ref('')},
   { label: "Phone", validationFn: phoneInputIsValid, itemRef: ref('')},
 ]
+
+const toast = useToast();
+const showError = (label) => {
+    toast.add({ severity: 'error', summary: 'Invalid input', detail: label + " is improperly formatted, empty or contains forbidden characters.", life: 3000 });
+};
+
+const handleSubmitClick = () => {
+  for (let item of items) {
+    if (!item.validationFn(item.itemRef.value)) {
+      showError(item.label);
+    }
+  }
+}
 
 </script>
 
@@ -43,8 +56,5 @@ const items = [
 
 .p-button {
   width: fit-content
-}
-.invalid-input {
-  border: 3px solid rgb(236, 1, 1);
 }
 </style>
