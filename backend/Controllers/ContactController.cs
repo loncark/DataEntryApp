@@ -13,4 +13,10 @@ public class ContactController : ControllerBase
     {
         return contactService.GetAllContacts();
     }
+
+    [HttpPost]
+    public IActionResult Post([FromBody] Contact contact) 
+    {
+        return contactService.SaveContact(contact) ? StatusCode(200) : StatusCode(409);
+    }
 }
