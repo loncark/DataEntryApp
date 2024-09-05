@@ -18,6 +18,8 @@ import { nameInputIsValid, addressInputIsvalid, emailInputIsValid, phoneInputIsV
 import { ref } from 'vue'
 import Toast from 'primevue/toast'
 import { useToast } from "primevue/usetoast";
+import { INVALID_INPUT_MSG, SAVE_SUCCESSFUL_MSG, EMAIL_TAKEN_MSG } from '../other/constants'
+import { query } from '../other/utils'
 
 const items = [
   { label: "First Name", validationFn: nameInputIsValid, itemRef: ref('')},
@@ -28,15 +30,38 @@ const items = [
 ]
 
 const toast = useToast();
-const showError = (label) => {
-    toast.add({ severity: 'error', summary: 'Invalid input', detail: label + " is improperly formatted, empty or contains forbidden characters.", life: 3000 });
+const showInvalidInputError = (label) => {
+    toast.add({ severity: 'error', summary: 'Invalid input', detail: label + INVALID_INPUT_MSG, life: 3000 });
+};
+const showEmailTakenError = (label) => {
+    toast.add({ severity: 'error', summary: 'Error', detail: EMAIL_TAKEN_MSG, life: 3000 });
+};
+const showSaveSuccess = () => {
+    toast.add({ severity: 'success', summary: 'Success', detail: SAVE_SUCCESSFUL_MSG, life: 3000 });
 };
 
-const handleSubmitClick = () => {
+const handleSubmitClick = async () => {
   for (let item of items) {
     if (!item.validationFn(item.itemRef.value)) {
-      showError(item.label);
+      showInvalidInputError(item.label);
+      return;
     }
+  }
+
+  let requestBody = {
+    "firstName": items[0].itemRef.value,
+    "lastName": items[1].itemRef.value,
+    "email": items[2].itemRef.value,
+    "address": items[3].itemRef.value,
+    "phone": items[4].itemRef.value,
+  }
+  const result = await query('save', 'POST', JSON.stringify(requestBody));
+
+  if(result.status === 200) {
+    showSaveSuccess();
+  }
+  if(result.status === 409) {
+    showEmailTakenError();
   }
 }
 

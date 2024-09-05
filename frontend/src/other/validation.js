@@ -18,7 +18,7 @@ export const emailInputIsValid = (email) => {
 }
 
 export const phoneInputIsValid = (number) => {
-    const phoneRegex = /^\+?[1-9]\d{1,14}$/;
+    const phoneRegex = /^\+\-?[1-9]+\d{1,14}$/;
     return notEmpty(number) && phoneRegex.test(number);
 }
 

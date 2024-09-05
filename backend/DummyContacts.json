@@ -1,0 +1,23 @@
+[
+  {
+    "firstName": "John",
+    "lastName": "Doe",
+    "email": "johndoe@example.com",
+    "address": "123 Elm Street",
+    "phone": "+1-555-123-4567"
+  },
+  {
+    "firstName": "Jane",
+    "lastName": "Smith",
+    "email": "janesmith@example.com",
+    "address": "456 Oak Avenue",
+    "phone": "+1-555-234-5678"
+  },
+  {
+    "firstName": "Robert",
+    "lastName": "Brown",
+    "email": "robertbrown@example.com",
+    "address": "789 Pine Road",
+    "phone": "+1-555-345-6789"
+  }
+]
