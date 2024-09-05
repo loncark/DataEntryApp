@@ -19,10 +19,10 @@ export const emailInputIsValid = (email) => {
 
 export const phoneInputIsValid = (number) => {
     const phoneRegex = /^(\+|-)?[1-9]\d{1,14}$/;
-    return notEmpty(number) && phoneRegex.test(number);
+    return phoneRegex.test(number);
 }
 
 export const addressInputIsvalid = (address) => {
     const addressRegex = /^[a-zA-Z0-9\s\-.,']+$/
-    return notEmpty(address) && (addressRegex.test(address));
+    return addressRegex.test(address);
 }
