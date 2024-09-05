@@ -55,12 +55,12 @@ const handleSubmitClick = async () => {
     "address": items[3].itemRef.value,
     "phone": items[4].itemRef.value,
   }
-  const result = await query('contacts', 'POST', JSON.stringify(requestBody));
+  const status = await query('contacts', 'POST', JSON.stringify(requestBody));
 
-  if(result.status === 200) {
+  if(status === 200) {
     showSaveSuccess();
   }
-  if(result.status === 409) {
+  if(status === 409) {
     showEmailTakenError();
   }
 }

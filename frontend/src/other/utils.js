@@ -1,6 +1,5 @@
 import { BACKEND_BASE_URL } from './constants'
 
-
 export async function query(endpoint, method, body) {
     try {
         const response = await fetch(BACKEND_BASE_URL + endpoint, {
@@ -10,12 +9,8 @@ export async function query(endpoint, method, body) {
             },
             body: body
         });
-        
-        if (!response.ok) {
-            throw new Error(`Error: ${response.status} ${response.statusText}`);
-        }
     
-        return await response.json();   //expected: object {"status": 409} or 200
+        return response.status;
     }
     catch (error) {
         console.log(error);

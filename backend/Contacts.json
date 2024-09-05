@@ -4,20 +4,20 @@
     "LastName": "Doe",
     "Email": "johndoe@example.com",
     "Address": "123 Elm Street",
-    "Phone": "+002B1-555-123-4567"
+    "Phone": "\u002B002B1-555-123-4567"
   },
   {
     "FirstName": "Jane",
     "LastName": "Smith",
     "Email": "janesmith@example.com",
     "Address": "456 Oak Avenue",
-    "Phone": "+002B1-555-234-5678"
+    "Phone": "\u002B002B1-555-234-5678"
   },
   {
     "FirstName": "Robert",
     "LastName": "Brown",
     "Email": "robertbrown@example.com",
     "Address": "789 Pine Road",
-    "Phone": "+002B1-555-345-6789"
+    "Phone": "\u002B002B1-555-345-6789"
   }
 ]
