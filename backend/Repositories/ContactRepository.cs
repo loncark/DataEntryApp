@@ -1,6 +1,6 @@
 ﻿using System.Text.Json;
 
-namespace backend
+namespace backend.Repositories
 {
     public class ContactRepository
     {

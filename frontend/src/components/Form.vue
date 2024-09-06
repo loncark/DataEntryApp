@@ -33,7 +33,7 @@ const toast = useToast();
 const showInvalidInputError = (label) => {
     toast.add({ severity: 'error', summary: 'Invalid input', detail: label + INVALID_INPUT_MSG, life: 3000 });
 };
-const showEmailTakenError = (label) => {
+const showEmailTakenError = () => {
     toast.add({ severity: 'error', summary: 'Error', detail: EMAIL_TAKEN_MSG, life: 3000 });
 };
 const showSaveSuccess = () => {
@@ -52,8 +52,8 @@ const handleSubmitClick = async () => {
     "firstName": items[0].itemRef.value,
     "lastName": items[1].itemRef.value,
     "email": items[2].itemRef.value,
-    "address": items[3].itemRef.value,
-    "phone": items[4].itemRef.value,
+    "address": items[3].itemRef.value !== '' ? items[3].itemRef.value : null,
+    "phone": items[4].itemRef.value !== '' ? items[4].itemRef.value : null,
   }
   const status = await query('contacts', 'POST', JSON.stringify(requestBody));
 

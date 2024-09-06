@@ -2,8 +2,9 @@
 using System.IO;
 using System.Text.Json;
 using System.Linq;
+using backend.Repositories;
 
-namespace backend
+namespace backend.Services
 {
     public class ContactService
     {
@@ -16,7 +17,7 @@ namespace backend
 
         public bool SaveContact(Contact newContact)
         {
-            if(EmailAlreadyExists(newContact.Email))
+            if (EmailAlreadyExists(newContact.Email))
             {
                 return false;
             }
