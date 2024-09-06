@@ -1,3 +1,6 @@
+![image](https://github.com/user-attachments/assets/fa8b9cc4-aaf3-4de9-8320-23b5b897520a)
+
+
 To run the frontend:
 
 ```bash
